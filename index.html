@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Dia dos Namorados</title>
+    <title>Pesquisa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffe6f2;
+            background-color: #ffffff;
             text-align: center;
-            padding: 50px;
+            padding: 0;
+            margin: 0;
             position: relative;
+        }
+    
+        .search-bar {
+            width: 90%;
+            max-width: 600px;
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #dcdcdc;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            outline: none;
         }
         .card {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: auto;
+            max-width: 90%;
+            margin: 20px auto;
             padding: 20px;
             z-index: 1;
             display: inline-block;
@@ -88,12 +100,32 @@
             width: 400px;
         }
         .left-image {
-            left: calc(50% - 600px);
+            left: calc(50% - 150px);
             transform: rotate(-45deg);
         }
         .right-image {
-            right: calc(50% - 600px);
+            right: calc(50% - 200px);
             transform: rotate(45deg);
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 36px;
+                margin-top: 50px;
+            }
+            .search-bar {
+                font-size: 16px;
+            }
+            .card {
+                padding: 10px;
+            }
+            #heartButton {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .decorative-images img {
+                width: 150px;
+            }
         }
     </style>
 </head>
@@ -114,8 +146,8 @@
     </div>
 
     <div class="decorative-images">
-        <img src="img/aline1.jpg" class="left-image" alt="Imagem">
-        <img src="img/aline2.jpg" class="right-image" alt="Imagem">
+        <img src="img/aline2.jpg" class="left-image" alt="Imagem">
+        <img src="img/aline1.jpg" class="right-image" alt="Imagem">
     </div>
 
     <script>
