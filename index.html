@@ -7,22 +7,12 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            text-align: center;
-            padding: 0;
+            background-color: #f4f4f4;
             margin: 0;
-            position: relative;
-        }
-    
-        .search-bar {
-            width: 90%;
-            max-width: 600px;
-            padding: 10px;
-            font-size: 18px;
-            border: 1px solid #dcdcdc;
-            border-radius: 24px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            outline: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .card {
             background-color: #fff;
@@ -31,8 +21,8 @@
             max-width: 90%;
             margin: 20px auto;
             padding: 20px;
+            text-align: center;
             z-index: 1;
-            display: inline-block;
         }
         .card img {
             max-width: 100%;
@@ -43,6 +33,16 @@
         }
         .card p {
             color: #5a5a5a;
+        }
+        #heartButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #d9534f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
         .heart {
             position: absolute;
@@ -79,43 +79,87 @@
                 opacity: 0;
             }
         }
-        #heartButton {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 90%;
+            max-width: 800px;
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
+        }
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza o conteúdo (imagem e botão) */
+            padding-bottom: 10px; /* Espaço para o botão */
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease-in-out; /* Adiciona transição para a animação */
+        }
+        .grid-item button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 14px;
             color: #fff;
-            background-color: #d9534f;
+            background-color: #5cb85c; /* Cor verde para o botão de mover */
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .decorative-images {
-            position: relative;
-            margin-top: 20px;
-            height: 400px; /* Add height to ensure scroll */
-        }
-        .decorative-images img {
-            position: absolute;
-            bottom: 0;
-            width: 400px;
-        }
-        .left-image {
-            left: calc(50% - 150px);
-            transform: rotate(-45deg);
-        }
-        .right-image {
-            right: calc(50% - 200px);
-            transform: rotate(45deg);
+        .grid-item button:hover {
+            background-color: #4cae4c;
         }
 
+        /* Classe para a animação da imagem */
+        .grid-item img.animate {
+            animation: moveImage 0.8s ease-in-out;
+        }
+        @keyframes moveImage {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(5deg) scale(1.05);
+            }
+            50% {
+                transform: rotate(-5deg) scale(1.05);
+            }
+            75% {
+                transform: rotate(5deg) scale(1.05);
+            }
+            100% {
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        .romantic-phrase {
+            text-align: center;
+            padding: 15px;
+            color: #333;
+            font-style: italic;
+            width: 90%;
+            max-width: 800px;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+
+        /* Estilos de fundo para cada linha de frase (adapte cores conforme desejar) */
+        .line-1 { background-color: #ffebee; }
+        .line-2 { background-color: #fce4ec; }
+        .line-3 { background-color: #f3e5f5; }
+        .line-4 { background-color: #ede7f6; }
+        .line-5 { background-color: #e3f2fd; }
+        .line-6 { background-color: #e0f7fa; }
+
         @media (max-width: 600px) {
-            .logo {
-                font-size: 36px;
-                margin-top: 50px;
-            }
-            .search-bar {
-                font-size: 16px;
-            }
             .card {
                 padding: 10px;
             }
@@ -123,8 +167,12 @@
                 padding: 8px 16px;
                 font-size: 14px;
             }
-            .decorative-images img {
-                width: 150px;
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .grid-item button {
+                padding: 6px 12px;
+                font-size: 12px;
             }
         }
     </style>
@@ -135,19 +183,86 @@
         <img src="img/coracao.png" alt="Imagem romântica de Dia dos Namorados">
         <h1>Feliz Dia dos Namorados!</h1>
         <p>Oii More mio, galota, negucha 🙃🙃<br>
-        Tempo passa tão rápido que já se passou mais de 2 anos quase 3 enrolando em, o bom é que mesmo na dor ou na doença estamos juntinhos 😁😁, aos poucos fomos construindo nosso jeito de ser. Fico até mais solto e esqueço dos problemas quando estou contigo, principalmente quando vou na casa da sogra kkkk,<br>
-        Nosso jeito um com outro mudou bastante, fomos se conectando.<br>
-        A chama 🔥 não pode apagar...<br>
-        A chama que deixa a gente com frio, com calor, molhado, mas é ela que nos uni, essa chama é o que sentimos por dentro mesmo no dia mais frio que tiver, ela não irá apagar e se juntar fica cada vez mais forte.<br><br>
-        Te adoro negucha, já tá na hora de unir essas chamas minha chatinha favorita 🙃🙃<br>
-        👩‍❤️‍💋‍👨
+            Tempo passa tão rápido que já se passou mais de 2 anos quase 3 enrolando em, o bom é que mesmo na dor ou na doença estamos juntinhos 😁😁, aos poucos fomos construindo nosso jeito de ser. Fico até mais solto e esqueço dos problemas quando estou contigo, principalmente quando vou na casa da sogra kkkk,<br>
+            Nosso jeito um com outro mudou bastante, fomos se conectando.<br>
+            A chama 🔥 não pode apagar...<br>
+            A chama que deixa a gente com frio, com calor, molhado, mas é ela que nos uni, essa chama é o que sentimos por dentro mesmo no dia mais frio que tiver, ela não irá apagar e se juntar fica cada vez mais forte.<br><br>
+            Te adoro negucha, já tá na hora de unir essas chamas minha chatinha favorita 🙃🙃<br>
+            👩‍❤️‍💋‍👨
         </p>
         <button id="heartButton">Clique Aqui!</button>
     </div>
 
-    <div class="decorative-images">
-        <img src="img/aline2.jpg" class="left-image" alt="Imagem">
-        <img src="img/aline1.jpg" class="right-image" alt="Imagem">
+    <div class="romantic-phrase line-1">"Ao seu lado, cada instante é uma eternidade de felicidade."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline1.jpg" alt="Imagem Aline 1">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline2.jpg" alt="Imagem Aline 2">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
+    <div class="romantic-phrase line-2">"Seu amor é a melodia que embala minha alma."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline3.jpg" alt="Imagem Aline 3">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline4.jpg" alt="Imagem Aline 4">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
+    <div class="romantic-phrase line-3">"Em seus olhos, encontro o universo dos meus sonhos."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline5.jpg" alt="Imagem Aline 5">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline6.jpg" alt="Imagem Aline 6">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
+    <div class="romantic-phrase line-4">"Seu sorriso é o sol que ilumina os meus dias."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline1.jpg" alt="Imagem Aline 1">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline2.jpg" alt="Imagem Aline 2">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
+    <div class="romantic-phrase line-5">"Cada batida do meu coração ecoa o seu nome."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline3.jpg" alt="Imagem Aline 3">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline4.jpg" alt="Imagem Aline 4">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
+    <div class="romantic-phrase line-6">"Nos seus braços, encontrei meu porto seguro."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline5.jpg" alt="Imagem Aline 5">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline6.jpg" alt="Imagem Aline 6">
+            <button class="move-button">Mover Imagem</button>
+        </div>
     </div>
 
     <script>
@@ -168,6 +283,19 @@
                 heart.remove();
             }, 5000);
         }
+
+        // Adiciona funcionalidade para os botões de mover imagem
+        document.querySelectorAll('.move-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const img = this.previousElementSibling; // Pega a imagem que está antes do botão
+                img.classList.add('animate'); // Adiciona a classe de animação
+
+                // Remove a classe de animação após a animação terminar para que possa ser acionada novamente
+                img.addEventListener('animationend', () => {
+                    img.classList.remove('animate');
+                }, { once: true }); // O { once: true } garante que o listener seja removido após uma execução
+            });
+        });
     </script>
 
 </body>
