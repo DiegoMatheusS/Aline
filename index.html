@@ -13,6 +13,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden; /* Evita barra de rolagem horizontal devido a corações aleatórios */
         }
         .card {
             background-color: #fff;
@@ -45,13 +46,13 @@
             cursor: pointer;
         }
         .heart {
-            position: absolute;
+            position: fixed; /* Mudei de absolute para fixed para cobrir toda a tela */
             width: 20px;
             height: 20px;
             background: red;
             transform: rotate(-45deg);
-            z-index: 0;
-            animation: fly 2s linear infinite;
+            z-index: 99; /* Z-index alto para ficar acima de outros elementos */
+            animation: fall 3s linear forwards; /* Mudei o nome da animação e adicionado 'forwards' */
         }
         .heart::before, .heart::after {
             content: '';
@@ -69,7 +70,20 @@
             left: 10px;
             top: 0;
         }
-        @keyframes fly {
+        /* Nova animação para os corações caírem */
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(-45deg) scale(0.8); /* Começa um pouco acima e menor */
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(-45deg) scale(1.2); /* Cai até sumir na parte inferior e cresce um pouco */
+                opacity: 0;
+            }
+        }
+
+        /* Animação original para os corações voadores (removida se não for mais usada) */
+        /* @keyframes fly {
             0% {
                 transform: translateY(0) scale(1);
                 opacity: 1;
@@ -78,7 +92,8 @@
                 transform: translateY(-100vh) scale(0.5);
                 opacity: 0;
             }
-        }
+        } */
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -108,14 +123,14 @@
             padding: 8px 15px;
             font-size: 14px;
             color: #fff;
-            background-color: #5cb85c; /* Cor verde para o botão de mover */
+            background-color: #d9534f; /* Cor vermelha para o botão de mover */
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         .grid-item button:hover {
-            background-color: #4cae4c;
+            background-color: #c9302c;
         }
 
         /* Classe para a animação da imagem */
@@ -228,8 +243,46 @@
             <button class="move-button">Mover Imagem</button>
         </div>
     </div>
+
+    <div class="romantic-phrase line-4">"Seu sorriso é o sol que ilumina os meus dias."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline1.jpg" alt="Imagem Aline 1">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline2.jpg" alt="Imagem Aline 2">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
+    <div class="romantic-phrase line-5">"Cada batida do meu coração ecoa o seu nome."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline3.jpg" alt="Imagem Aline 3">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline4.jpg" alt="Imagem Aline 4">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
+    <div class="romantic-phrase line-6">"Nos seus braços, encontrei meu porto seguro."</div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="img/aline5.jpg" alt="Imagem Aline 5">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+        <div class="grid-item">
+            <img src="img/aline6.jpg" alt="Imagem Aline 6">
+            <button class="move-button">Mover Imagem</button>
+        </div>
+    </div>
+
     <script>
         document.getElementById('heartButton').addEventListener('click', function() {
+            // Cria 20 corações aleatoriamente na tela
             for (let i = 0; i < 20; i++) {
                 createHeart();
             }
@@ -238,13 +291,22 @@
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            
+            // Posição horizontal aleatória em qualquer lugar da tela
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            
+            // Posição vertical inicial aleatória na parte superior da tela
+            heart.style.top = Math.random() * -100 + 'px'; // Começa de -100px até 0px (fora da tela superior)
+            
+            // Duração da animação aleatória para variar a velocidade de queda
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Entre 3 e 6 segundos
+            
             document.body.appendChild(heart);
 
+            // Remove o coração após a animação terminar
             setTimeout(() => {
                 heart.remove();
-            }, 5000);
+            }, 6000); // Remove após 6 segundos para garantir que a animação termine
         }
 
         // Adiciona funcionalidade para os botões de mover imagem
